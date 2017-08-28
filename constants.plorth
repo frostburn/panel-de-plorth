@@ -1,0 +1,34 @@
+# Build constants to represent fundamental bitboards
+6 "WIDTH" const
+64 WIDTH / floor "HEIGHT" const
+
+1 0 (over | swap 1 << swap) WIDTH times nip
+"TOP" const
+
+TOP HEIGHT 1 - WIDTH * << "BOTTOM" const
+
+1 0 (over | swap WIDTH << swap) HEIGHT times nip
+"LEFT_WALL" const
+
+LEFT_WALL 0 (over | swap 1 << swap) WIDTH times nip
+"FULL" const
+
+FULL LEFT_WALL ^ "RIGHT_MASK" const
+
+0 [] (over swap push (1 +) dip) HEIGHT times nip
+"ROW_RANGE" const
+
+0 [] (over swap push (1 +) dip) WIDTH times nip
+"COLUMN_RANGE" const
+
+TOP [] (over swap push (WIDTH <<) dip) HEIGHT times nip
+"ROWS" const
+
+LEFT_WALL [] (over swap push (1 <<) dip) WIDTH times nip
+"COLUMNS" const
+
+# Other constants
+6 "NUM_COLORS" const
+
+0 [] (over swap push (1 +) dip) NUM_COLORS times nip
+"COLOR_RANGE" const

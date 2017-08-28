@@ -1,0 +1,5 @@
+# Define some helper words with more natural argument order.
+:get swap @;
+:set rot !;
+:del swap delete;
+:prettyprint >source println;

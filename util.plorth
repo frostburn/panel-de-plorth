@@ -1,0 +1,32 @@
+: debug
+  dup >source println
+;
+
+: 2debug
+  debug
+  (debug) dip
+;
+
+: 3debug
+ debug
+ (debug) dip
+ (debug) 2dip
+;
+
+: rand-next
+  1664525 * 1013904223 + 4294967295 &
+;
+
+# Nothing to see here. Move along now.
+now "__rand_val0" const
+now 4293874987 ^ rand-next "__rand_val1" const
+: rand
+  __rand_val0 rand-next dup "__rand_val0" const
+  __rand_val1 rand-next dup "__rand_val1" const
+  32 << |
+;
+
+# Hey, I told you there was nothing to see here.
+: sleep
+  now (now =) curry () while
+;

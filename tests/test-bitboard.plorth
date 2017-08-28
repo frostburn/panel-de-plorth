@@ -1,0 +1,17 @@
+"./framework" import
+"../bitboard" import
+
+"shift"
+[
+  ( 234345 left 115092 = ),
+  ( 234345 right 206482 = ),
+  ( 234345 up 3661 = ),
+  ( 234345 down 14998080 = ),
+]
+test-case
+
+"match"
+[
+  (2314234234 matches 15745336 = ),
+]
+test-case

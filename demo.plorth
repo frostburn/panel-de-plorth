@@ -1,0 +1,5 @@
+"./field" import
+
+Field new (drop rand rand &) COLOR_RANGE map "colors" set
+sanitize
+(dup print fall clear sleep rewind) 10 times print

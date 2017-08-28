@@ -1,0 +1,83 @@
+"./bitboard" import
+"./object" import
+"./util" import
+
+{
+  "prototype": {
+    "constructor": (
+      NUM_COLORS [0] * "colors" set
+      0 "fell" set
+    ),
+    "print": (
+      "colors" get nip 1
+      (
+        (2dup print-block 1 << ) WIDTH times "\n" print
+      ) HEIGHT times
+      "\u001b[0m" print
+      2drop
+    ),
+    "sanitize": (
+      "colors" get
+      FULL (over & tuck ^ swap) rot map nip
+      "colors" set
+    ),
+    "clear": (
+      "fell" get ~
+      ("colors" get) dip
+      (over & matches ^) curry swap map
+      "colors" set
+    ),
+    "fall": (
+      "colors" get
+      0 swap
+      (
+        over (|) swap reduce
+        over & ^ WIDTH >>
+        (over & dup rot ^ swap WIDTH <<
+          rot over | rot rot
+        ^) curry
+        swap map
+      ) ROWS reverse for-each
+      ("fell" set) dip
+      "colors" set
+    ),
+    "handle-all-gravity": (
+      "colors" get
+      (
+        dup (|) swap reduce
+        WIDTH >> BOTTOM |
+        (fall-once) curry
+        swap map
+      ) HEIGHT 2 * times
+      "colors" set
+    )
+  },
+} "Field" const
+
+: to-field
+  [] (push) NUM_COLORS times reverse "colors"
+  Field new !
+;
+
+# Takes: colors, bit
+# Gives: (nothing)
+: print-block
+  ( & 0 != ) curry swap find-index nip
+  null?
+    (drop "\u001b[30;1m\u2b1a " print)
+    ("\u001b[3" print 1 + print ";1m" print "\u25a3 " print)
+  if-else
+;
+
+# Takes: color, bellow
+# Gives: color one step down
+: fall-once
+  tuck ~ over & WIDTH <<
+  (&) dip |
+;
+
+# Takes: color, bellow (line)
+# Gives: color (line) one step down
+: fall-one-line
+  & WIDTH <<
+;

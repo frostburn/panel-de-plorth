@@ -1,0 +1,37 @@
+"./constants" import
+
+: print-board
+  1 (
+    ( 2dup & 0 = (". ") ("@ ") if-else print 1 << )
+    WIDTH times "\n" print
+  ) HEIGHT times
+  2drop
+;
+
+:rewind
+  ( "\u001b[A" print ) HEIGHT times
+;
+
+: left
+  RIGHT_MASK & 1 >>
+;
+
+: right
+  1 << RIGHT_MASK &
+;
+
+:up
+  WIDTH >>
+;
+
+: down
+  WIDTH << FULL &
+;
+
+: matches
+  dup
+    dup left dup left & & dup right dup right | |
+  swap
+    dup up dup up & & dup down dup down | |
+  |
+;

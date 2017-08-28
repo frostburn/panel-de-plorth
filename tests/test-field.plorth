@@ -1,0 +1,31 @@
+"./framework" import
+"../field" import
+
+"fell"
+[
+  (
+    1 (dup 1 <<) NUM_COLORS 1 - times to-field
+    fall "fell" get TOP WIDTH << = nip
+  ),
+]
+test-case
+
+"clear"
+[
+  (
+    TOP HEIGHT 1 - WIDTH * << 3 HEIGHT 2 - WIDTH * << tuck |
+    Field new "colors" get rot 0 set "colors" set
+    clear "colors" get 0 get nip nip =
+  ),
+]
+test-case
+
+"no-clear-when-falling"
+[
+  (
+    7 1 WIDTH << 0 0 0 0 to-field (fall clear) HEIGHT times
+    "colors" get 0 get nip nip
+    1 6 WIDTH << | HEIGHT 2 - WIDTH * << =
+  ),
+]
+test-case
