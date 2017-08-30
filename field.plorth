@@ -57,7 +57,15 @@
         swap map
       ) HEIGHT 2 * times
       "colors" set
-    )
+    ),
+    "raise": (
+      "colors" get
+      (WIDTH >>) swap map
+      (drop rand NUM_COLORS %) COLUMN_RANGE map
+      from-labels print "colors" get nip
+      HEIGHT 1 - WIDTH * (>>) curry swap map
+      "colors" set
+    ),
   },
 } "Field" const
 
@@ -100,3 +108,5 @@
 : fall-one-line
   & WIDTH <<
 ;
+
+234234 234234 2342342 3454654 6456 46456456 to-field raise
