@@ -41,6 +41,13 @@
       ("fell" set) dip
       "colors" set
     ),
+    "raise": (
+      "colors" get
+      (WIDTH >>) swap map
+      (drop rand NUM_COLORS %) COLUMN_RANGE map
+      (1 swap <<) COLUMN_RANGE map
+      ((tuck get) dip 2debug | rot 2debug set) rot rot 2map
+    ),
     "handle-all-gravity": (
       "colors" get
       (
@@ -81,3 +88,5 @@
 : fall-one-line
   & WIDTH <<
 ;
+
+1 2 3 4 5 6 to-field raise print
