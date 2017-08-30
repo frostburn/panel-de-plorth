@@ -1,6 +1,22 @@
 "./framework" import
 "../field" import
 
+"labels"
+[
+  (
+    1 2 4 8 16 32 to-field
+    to-labels [0, 1, 2, 3, 4, 5]
+    WIDTH HEIGHT 1 - * [null] * +
+    =
+  ),
+  (
+    [null, 1, 2, 3, 4, 5, null, 0] from-labels
+    "colors" get nip
+    [128, 2, 4, 8, 16, 32] =
+  ),
+]
+test-case
+
 "fell"
 [
   (

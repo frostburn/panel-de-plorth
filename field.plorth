@@ -8,6 +8,13 @@
       NUM_COLORS [0] * "colors" set
       0 "fell" set
     ),
+    "to-labels": (
+      "colors" get nip [] 1
+      (
+        dup ( ( & 0 != ) curry rot find-index rot push ) dip 1 <<
+      ) WIDTH HEIGHT * times
+      drop nip
+    ),
     "print": (
       "colors" get nip 1
       (
@@ -57,6 +64,18 @@
 : to-field
   [] (push) NUM_COLORS times reverse "colors"
   Field new !
+;
+
+: from-labels
+  NUM_COLORS [0] * 1 rot
+  ( null? not
+      ( dup (rot @ rot tuck |) dip swap (rot !) dip)
+      ( drop )
+    if-else
+    1 <<
+  ) swap for-each
+  drop
+  "colors" Field new !
 ;
 
 # Takes: colors, bit
